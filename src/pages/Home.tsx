@@ -13,13 +13,13 @@ export default function Home() {
   const navigate = useNavigate();
 
   return (
-    <main className="min-h-[80vh] flex flex-col items-center justify-center text-center px-6 bg-gradient-to-tr from-[#0f172a] via-[#1e293b] to-[#111827] text-white relative overflow-hidden rounded-lg">
+    <main className="min-h-[75vh] max-w-4xl w-full flex flex-col items-center justify-center text-center px-6 bg-gradient-to-tr from-[#0f172a] via-[#1e293b] to-[#111827] text-white relative overflow-hidden rounded-lg">
       {/* Floating Blurred Circles */}
       <div className="absolute top-0 left-0 w-80 h-80 bg-violet-400 rounded-full blur-[120px] opacity-20 -z-10"></div>
       <div className="absolute bottom-0 right-0 w-80 h-80 bg-blue-500 rounded-full blur-[120px] opacity-20 -z-10"></div>
 
       <FadeInSection>
-        <div className="w-40 h-40 mx-auto rounded-full overflow-hidden border-4 border-violet-400 shadow-lg mb-6">
+        <div className="w-40 h-40 mx-auto rounded-full overflow-hidden border-4 border-pink-400 shadow-2xl shadow-black/40 bg-white mb-6">
           <img
             src="/profilepic.jpg"
             alt="Guillaume Nombro"
@@ -35,7 +35,7 @@ export default function Home() {
           </h1>
         </FadeInSection>
 
-        <h2 className="text-2xl md:text-3xl text-violet-400 font-medium h-10">
+        <h2 className="text-2xl md:text-3xl text-pink-400 font-medium h-10">
           {text}
           <Cursor cursorStyle="|" />
         </h2>
@@ -74,7 +74,7 @@ export default function Home() {
 
           {/* Skills Strip */}
           <div className="flex flex-wrap justify-center gap-3 mt-10">
-            {["React", "Tailwind", "TypeScript", ".NET", "Framer Motion"].map(
+            {["React", "TypeScript", ".NET", "AI/ML", "Clean coding"].map(
               (skill) => (
                 <motion.span
                   key={skill}
