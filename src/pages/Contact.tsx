@@ -17,7 +17,7 @@ export default function Contact() {
         <p className="text-white/80 text-lg sm:text-xl leading-relaxed max-w-xl mx-auto">
           I’m actively looking for full-time opportunities in{" "}
           <span className="text-pink-400 font-medium">
-            frontend / full-stack development
+            Full-stack development
           </span>{" "}
           — especially roles where I can work on meaningful products,
           collaborate closely with teams, and keep growing.
