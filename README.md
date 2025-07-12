@@ -73,7 +73,7 @@ src/
 If you’re hiring for **frontend** or **full-stack roles**, feel free to reach out:
 
 - 📧 Email: `guillaumenombro@gmail.com`
-- 💼 LinkedIn: [linkedin.com/in/your-linkedin]([https://linkedin.com/in/your-linkedin](https://www.linkedin.com/in/jeremie-nombro-2749b7239/)
+- 💼 LinkedIn: (https://www.linkedin.com/in/jeremie-nombro-2749b7239/)
 
 > 💡 I also occasionally take on small to medium-sized freelance projects — feel free to pitch your idea.
 
@@ -85,4 +85,4 @@ This project is not licensed for reuse. All rights reserved.
 
 ---
 
-Built with ❤️ by [Jeremie](https://github.com/GuiNom)
+Built with ❤️ by [Jeremie](https://github.com/GuiNom16)
