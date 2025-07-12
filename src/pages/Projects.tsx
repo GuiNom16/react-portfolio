@@ -137,19 +137,31 @@ export default function Projects() {
         <Tabs.Root defaultValue="professional" className="space-y-8">
           {/* Tabs List */}
           <Tabs.List className="flex justify-center gap-4 mb-8">
-            <Tabs.Trigger
-              value="professional"
-              className="px-6 py-2 rounded-lg font-medium bg-[#2c2f3f] text-white hover:bg-[#3c3f4f] transition-all duration-200 shadow-sm data-[state=active]:bg-violet-600 data-[state=active]:text-white data-[state=active]:shadow-lg"
+            <motion.div
+              initial={{ opacity: 0, y: -10 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.4 }}
             >
-              💼 Professional Projects
-            </Tabs.Trigger>
+              <Tabs.Trigger
+                value="professional"
+                className="px-6 py-2 rounded-lg font-medium bg-[#2c2f3f] text-white hover:bg-[#3c3f4f] transition-all duration-200 shadow-sm data-[state=active]:bg-violet-600 data-[state=active]:text-white data-[state=active]:shadow-lg"
+              >
+                💼 Professional Projects
+              </Tabs.Trigger>
+            </motion.div>
 
-            <Tabs.Trigger
-              value="personal"
-              className="px-6 py-2 rounded-lg font-medium bg-[#2c2f3f] text-white hover:bg-[#3c3f4f] transition-all duration-200 shadow-sm data-[state=active]:bg-violet-600 data-[state=active]:text-white data-[state=active]:shadow-lg"
+            <motion.div
+              initial={{ opacity: 0, y: -10 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.4, delay: 0.1 }}
             >
-              🛠️ Personal Projects
-            </Tabs.Trigger>
+              <Tabs.Trigger
+                value="personal"
+                className="px-6 py-2 rounded-lg font-medium bg-[#2c2f3f] text-white hover:bg-[#3c3f4f] transition-all duration-200 shadow-sm data-[state=active]:bg-violet-600 data-[state=active]:text-white data-[state=active]:shadow-lg"
+              >
+                🛠️ Personal Projects
+              </Tabs.Trigger>
+            </motion.div>
           </Tabs.List>
 
           {/* Professional Tab */}

@@ -41,7 +41,7 @@ export default function LivePlayground({ code }: LivePlaygroundProps) {
           transition={{ duration: 0.6, delay: 0.1 }}
         >
           <LiveProvider code={code} noInline scope={scope}>
-            <Card className="p-4 bg-[#1e293b] border border-white/10 shadow-md h-[700px]">
+            <Card className="p-4 bg-[#1e293b] border border-white/10 shadow-md">
               <div className="flex flex-col md:flex-row gap-6 h-full">
                 {/* Preview */}
                 <div className="flex-1 rounded bg-muted p-4 border border-white/10 overflow-auto min-h-[300px]">
@@ -49,7 +49,7 @@ export default function LivePlayground({ code }: LivePlaygroundProps) {
                 </div>
 
                 {/* Editor + Error */}
-                <div className="flex flex-col flex-1 min-w-[320px] max-h-full">
+                <div className="flex flex-col flex-1  max-h-full">
                   <div className="bg-black text-white rounded text-sm p-3 font-mono overflow-auto flex-grow max-h-[700px]">
                     <LiveEditor />
                   </div>
