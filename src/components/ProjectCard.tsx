@@ -1,5 +1,5 @@
 import { FiGithub, FiGlobe, FiPackage } from "react-icons/fi";
-import { motion } from "framer-motion";
+import { motion, AnimatePresence } from "framer-motion";
 import { useEffect, useState } from "react";
 
 type ProjectCardProps = {
@@ -27,7 +27,7 @@ export default function ProjectCard({
     if (techImages.length === 0) return;
     const interval = setInterval(() => {
       setCurrentIndex((prev) => (prev + 1) % techImages.length);
-    }, 2500);
+    }, 3000);
     return () => clearInterval(interval);
   }, [techImages]);
 
@@ -95,13 +95,19 @@ export default function ProjectCard({
 
         {/* Right side - Rotating tech logo */}
         {techImages.length > 0 && (
-          <div className="flex-shrink-0 w-full md:w-56 lg:w-64 flex justify-center items-center">
-            <img
-              src={techImages[currentIndex]}
-              alt={`Tech ${currentIndex + 1}`}
-              className="rounded-lg object-contain h-28 w-28 transition-opacity duration-500"
-              key={techImages[currentIndex]}
-            />
+          <div className="flex-shrink-0 w-full md:w-56 lg:w-64 flex justify-center items-center relative h-28">
+            <AnimatePresence mode="wait">
+              <motion.img
+                key={techImages[currentIndex]}
+                src={techImages[currentIndex]}
+                alt={`Tech ${currentIndex + 1}`}
+                initial={{ opacity: 0 }}
+                animate={{ opacity: 1 }}
+                exit={{ opacity: 0 }}
+                transition={{ duration: 0.5 }}
+                className="rounded-lg object-contain h-28 w-28 absolute"
+              />
+            </AnimatePresence>
           </div>
         )}
       </div>
