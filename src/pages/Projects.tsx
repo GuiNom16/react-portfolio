@@ -67,7 +67,7 @@ export default function Projects() {
         "/tech-images/flask_logo.png",
         "/tech-images/react_logo.png",
       ],
-      github: "https://github.com/yourusername/devnotes",
+      github: "https://github.com/GuiNom16/devnotes",
     },
     {
       title: "PromptCraft",
