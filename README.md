@@ -5,7 +5,7 @@ A modern, responsive portfolio website built with **React**, **TypeScript**, and
 
 ## 🚀 Live Demo
 
-👉 [jeremie.dev]([https://jeremie.dev](https://react-portfolio-n6vcoibdz-jeremies-projects-3a594e2a.vercel.app/))  
+👉 [jeremie.dev](https://react-portfolio-n6vcoibdz-jeremies-projects-3a594e2a.vercel.app/)
 
 ---
 
@@ -73,7 +73,7 @@ src/
 If you’re hiring for **frontend** or **full-stack roles**, feel free to reach out:
 
 - 📧 Email: `guillaumenombro@gmail.com`
-- 💼 LinkedIn: (https://www.linkedin.com/in/jeremie-nombro-2749b7239/)
+- 💼 LinkedIn: https://www.linkedin.com/in/jeremie-nombro-2749b7239/
 
 > 💡 I also occasionally take on small to medium-sized freelance projects — feel free to pitch your idea.
 
