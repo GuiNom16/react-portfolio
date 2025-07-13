@@ -28,6 +28,7 @@ function Demo() {
         ringSize={3}
         duration={10000}
         hint="Go to documentation!"
+        zIndex={45}
         tooltipPosition="bottom"
         ringBorderRadius="6px"
       >
