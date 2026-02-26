@@ -1,4 +1,3 @@
-import { Routes, Route } from "react-router-dom";
 import Layout from "./components/Layout";
 import LivePlayground from "./pages/LivePlayground";
 import Home from "./pages/Home";
@@ -24,7 +23,7 @@ function Demo() {
       </p>
       
       <Nudge
-        ringColor="#8b5cf6"
+        ringColor="#00f0ff"
         ringSize={3}
         duration={10000}
         hint="Go to documentation!"
@@ -36,11 +35,12 @@ function Demo() {
           onClick={() => window.open('https://www.npmjs.com/package/react-nudge-ui', '_blank')}
           style={{
             padding: "0.5rem 1.25rem",
-            backgroundColor: "#4f46e5",
+            backgroundColor: "#ff003c",
             color: "white",
             border: "none",
             borderRadius: "6px",
-            cursor: "pointer"
+            cursor: "pointer",
+            fontWeight: "bold",
           }}
         >
           Install react-nudge-ui
@@ -56,15 +56,12 @@ render(<Demo />);
 function App() {
   return (
     <Layout>
-      <Routes>
-        <Route path="/" element={<Home />} />
-        <Route path="/projects" element={<Projects />} />
-        <Route
-          path="/playground"
-          element={<LivePlayground code={playgroundCode} />}
-        />
-        <Route path="/contact" element={<Contact />} />
-      </Routes>
+      <div className="flex flex-col w-full relative">
+        <Home />
+        <Projects />
+        <LivePlayground code={playgroundCode} />
+        <Contact />
+      </div>
     </Layout>
   );
 }

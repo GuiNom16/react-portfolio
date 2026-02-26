@@ -3,6 +3,7 @@
 .scrollbar-hide::-webkit-scrollbar {
   display: none;
 }
+
 .scrollbar-hide {
   -ms-overflow-style: none;
   scrollbar-width: none;
@@ -78,6 +79,15 @@ button:focus-visible {
 } */
 
 @theme inline {
+  --font-sans: "Space Grotesk", sans-serif;
+  --font-mono: "JetBrains Mono", monospace;
+
+  /* Custom Neon glow colors */
+  --color-neon-cyan: #00f0ff;
+  --color-neon-magenta: #ff003c;
+  --color-neon-emerald: #00ff66;
+  --color-neon-orange: #ff6600;
+
   --radius-sm: calc(var(--radius) - 4px);
   --radius-md: calc(var(--radius) - 2px);
   --radius-lg: var(--radius);
@@ -100,11 +110,6 @@ button:focus-visible {
   --color-border: var(--border);
   --color-input: var(--input);
   --color-ring: var(--ring);
-  --color-chart-1: var(--chart-1);
-  --color-chart-2: var(--chart-2);
-  --color-chart-3: var(--chart-3);
-  --color-chart-4: var(--chart-4);
-  --color-chart-5: var(--chart-5);
   --color-sidebar: var(--sidebar);
   --color-sidebar-foreground: var(--sidebar-foreground);
   --color-sidebar-primary: var(--sidebar-primary);
@@ -117,37 +122,35 @@ button:focus-visible {
 
 :root {
   --radius: 0.625rem;
-  --background: oklch(1 0 0);
-  --foreground: oklch(0.145 0 0);
-  --card: oklch(1 0 0);
-  --card-foreground: oklch(0.145 0 0);
-  --popover: oklch(1 0 0);
-  --popover-foreground: oklch(0.145 0 0);
-  --primary: oklch(0.205 0 0);
-  --primary-foreground: oklch(0.985 0 0);
-  --secondary: oklch(0.97 0 0);
-  --secondary-foreground: oklch(0.205 0 0);
-  --muted: oklch(0.97 0 0);
-  --muted-foreground: oklch(0.556 0 0);
-  --accent: oklch(0.97 0 0);
-  --accent-foreground: oklch(0.205 0 0);
+  --background: oklch(0.13 0.02 260);
+  /* Deep navy base */
+  --foreground: oklch(0.985 0 0);
+  --card: oklch(0.18 0.02 260 / 0.4);
+  --card-foreground: oklch(0.985 0 0);
+  --popover: oklch(0.18 0.02 260 / 0.6);
+  --popover-foreground: oklch(0.985 0 0);
+  --primary: oklch(0.65 0.25 190);
+  /* Cyan primary */
+  --primary-foreground: oklch(0.1 0 0);
+  --secondary: oklch(0.6 0.25 0);
+  /* Magenta secondary */
+  --secondary-foreground: oklch(0.985 0 0);
+  --muted: oklch(0.2 0.02 260);
+  --muted-foreground: oklch(0.7 0.02 260);
+  --accent: oklch(0.65 0.25 190 / 0.2);
+  --accent-foreground: oklch(0.985 0 0);
   --destructive: oklch(0.577 0.245 27.325);
-  --border: oklch(0.922 0 0);
-  --input: oklch(0.922 0 0);
-  --ring: oklch(0.708 0 0);
-  --chart-1: oklch(0.646 0.222 41.116);
-  --chart-2: oklch(0.6 0.118 184.704);
-  --chart-3: oklch(0.398 0.07 227.392);
-  --chart-4: oklch(0.828 0.189 84.429);
-  --chart-5: oklch(0.769 0.188 70.08);
-  --sidebar: oklch(0.985 0 0);
-  --sidebar-foreground: oklch(0.145 0 0);
-  --sidebar-primary: oklch(0.205 0 0);
-  --sidebar-primary-foreground: oklch(0.985 0 0);
-  --sidebar-accent: oklch(0.97 0 0);
-  --sidebar-accent-foreground: oklch(0.205 0 0);
-  --sidebar-border: oklch(0.922 0 0);
-  --sidebar-ring: oklch(0.708 0 0);
+  --border: oklch(0.3 0.02 260);
+  --input: oklch(0.3 0.02 260);
+  --ring: oklch(0.65 0.25 190);
+  --sidebar: oklch(0.13 0.02 260);
+  --sidebar-foreground: oklch(0.985 0 0);
+  --sidebar-primary: oklch(0.65 0.25 190);
+  --sidebar-primary-foreground: oklch(0.1 0 0);
+  --sidebar-accent: oklch(0.2 0.02 260);
+  --sidebar-accent-foreground: oklch(0.985 0 0);
+  --sidebar-border: oklch(0.3 0.02 260);
+  --sidebar-ring: oklch(0.65 0.25 190);
 }
 
 .dark {
@@ -188,7 +191,36 @@ button:focus-visible {
   * {
     @apply border-border outline-ring/50;
   }
+
   body {
-    @apply bg-background text-foreground;
+    @apply bg-background text-foreground font-sans antialiased overflow-x-hidden;
+  }
+
+  /* Utilities for glassmorphism */
+  .glass-panel {
+    background-color: rgba(255, 255, 255, 0.05);
+    backdrop-filter: blur(24px);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
+  }
+
+  .glass-panel:hover {
+    border-color: rgba(255, 51, 0, 0.5);
+    box-shadow: 0 0 20px rgba(255, 51, 0, 0.2);
+    transition: all 0.3s ease;
+  }
+
+  .glow-text {
+    text-shadow: 0 0 10px rgba(255, 51, 0, 0.5);
+  }
+
+  .glow-text-magenta {
+    text-shadow: 0 0 10px rgba(255, 0, 60, 0.5);
+  }
+
+  /* Braincell Consensus Easter Egg Mode */
+  body.comic-sans-mode,
+  body.comic-sans-mode * {
+    font-family: "Comic Sans MS", "Comic Sans", cursive !important;
   }
 }

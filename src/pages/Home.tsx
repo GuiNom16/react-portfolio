@@ -1,99 +1,104 @@
-import { useNavigate } from "react-router-dom";
 import { useTypewriter, Cursor } from "react-simple-typewriter";
-import { FadeInSection } from "../components/FadeInSection";
 import { motion } from "framer-motion";
+import { ArrowRight, Code2, Terminal } from "lucide-react";
+import { Canvas } from "@react-three/fiber";
+import NeuralNetwork from "@/components/NeuralNetwork";
 
 export default function Home() {
   const [text] = useTypewriter({
-    words: ["Full-stack Developer", "React Specialist", ".NET Engineer"],
+    words: [
+      "REACT SPECIALIST;",
+      "FULL-STACK DEVELOPER;",
+      ".NET ENGINEER;",
+    ],
     loop: true,
     delaySpeed: 2000,
   });
 
-  const navigate = useNavigate();
+  const scrollTo = (id: string) => {
+    const section = document.getElementById(id);
+    if (section) section.scrollIntoView({ behavior: "smooth" });
+  };
 
   return (
-    <main className="min-h-[75vh] max-w-4xl w-full flex flex-col items-center justify-center text-center px-6 py-16 bg-gradient-to-tr from-[#0f172a] via-[#1e293b] to-[#111827] text-white relative overflow-hidden rounded-lg">
-      {/* Floating Blurred Circles */}
-      <div className="absolute top-0 left-0 w-80 h-80 bg-violet-400 rounded-full blur-[120px] opacity-20 -z-10"></div>
-      <div className="absolute bottom-0 right-0 w-80 h-80 bg-blue-500 rounded-full blur-[120px] opacity-20 -z-10"></div>
+    <motion.section
+      id="home"
+      initial={{ opacity: 0 }}
+      animate={{ opacity: 1 }}
+      transition={{ duration: 1 }}
+      className="min-h-screen w-full flex flex-col items-center justify-center text-center px-6 pt-24 pb-16 text-white relative overflow-hidden"
+    >
+      {/* 3D Neural Network Background */}
+      <div className="absolute inset-0 w-full h-full -z-10 pointer-events-none">
+        <Canvas camera={{ position: [0, 0, 50], fov: 60 }}>
+          <NeuralNetwork count={400} maxDistance={15} speed={1.5} />
+        </Canvas>
+      </div>
 
-      <FadeInSection>
-        <div className="w-40 h-40 mx-auto rounded-full overflow-hidden border-4 border-pink-400 shadow-2xl shadow-black/40 bg-white mb-6">
-          <img
-            src="/profilepic.jpg"
-            alt="Guillaume Nombro"
-            className="w-full h-full object-cover"
-          />
-        </div>
-      </FadeInSection>
+      {/* Deep Red/Orange Glowing Orbs for Techy Inspiration */}
+      <div className="absolute top-1/4 left-1/4 w-[400px] h-[400px] bg-[#ff3300] rounded-full blur-[150px] opacity-10 pointer-events-none -z-10 mix-blend-screen" />
+      <div className="absolute bottom-1/4 right-1/4 w-[500px] h-[500px] bg-[#ff003c] rounded-full blur-[180px] opacity-10 pointer-events-none -z-10 mix-blend-screen" />
 
-      <div className="max-w-4xl space-y-6">
-        <FadeInSection>
-          <h1 className="text-5xl md:text-6xl font-extrabold">
-            Jeremie Nombro
+      {/* Content Container */}
+      <div className="relative w-full max-w-4xl mx-auto flex flex-col items-center justify-center z-10">
+        <motion.div
+          initial={{ scale: 0.8, opacity: 0, y: 30 }}
+          animate={{ scale: 1, opacity: 1, y: 0 }}
+          transition={{ delay: 0.2, type: "spring", stiffness: 200, damping: 20 }}
+          className="relative group mb-12"
+        >
+          {/* Elegant Circular Image Frame */}
+          <div className="w-48 h-48 mx-auto rounded-full p-1 bg-gradient-to-b from-[#ff3300]/80 to-[#ff003c]/20 shadow-[0_0_50px_rgba(255,0,60,0.4)] relative z-10">
+            <div className="w-full h-full rounded-full overflow-hidden bg-black">
+              <img
+                src="/profilepic.jpg"
+                alt="Guillaume Nombro"
+                className="w-full h-full object-cover mix-blend-luminosity opacity-90 transition-all duration-700 ease-in-out group-hover:scale-105 group-hover:mix-blend-normal group-hover:opacity-100"
+              />
+            </div>
+          </div>
+        </motion.div>
+
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ delay: 0.4, duration: 0.8 }}
+          className="space-y-6"
+        >
+          <div className="flex items-center justify-center gap-2 text-[#ff3300] font-mono text-sm tracking-widest mb-6">
+            <Terminal className="w-4 h-4" />
+            <span>SYSTEM.INITIALIZE()</span>
+          </div>
+
+          <h1 className="text-6xl md:text-8xl font-black tracking-tighter text-transparent bg-clip-text bg-gradient-to-r from-white via-white/90 to-white/40 mb-2 drop-shadow-2xl">
+            Jeremie.dev
           </h1>
-        </FadeInSection>
 
-        <h2 className="text-2xl md:text-3xl text-pink-400 font-medium h-10">
-          {text}
-          <Cursor cursorStyle="|" />
-        </h2>
+          <div className="h-12 flex items-center justify-center mb-8">
+            <h2 className="text-2xl md:text-3xl font-mono text-[#ff003c] drop-shadow-[0_0_10px_rgba(255,0,60,0.5)] tracking-tight font-bold">
+              {text}
+              <Cursor cursorStyle="_" cursorColor="#ff3300" />
+            </h2>
+          </div>
 
-        <FadeInSection>
-          <p className="text-lg text-white/80 max-w-xl mx-auto">
-            I design and build modern, scalable web apps with React and .NET.
-            Focused on UX, performance, and clean architecture.
+          <p className="text-lg md:text-xl text-white/50 max-w-2xl mx-auto font-sans leading-relaxed tracking-wide">
+            Architecting modern, scalable web ecosystems. Merging high-performance <span className="text-white/90 font-medium">.NET</span> microservices with fluid <span className="text-white/90 font-medium">React</span> interactive experiences.
           </p>
 
-          <div className="flex flex-wrap gap-4 justify-center mt-4">
+          <div className="flex flex-wrap gap-6 justify-center mt-12">
             <motion.button
-              onClick={() => navigate("/projects")}
-              whileHover={{
-                scale: 1.05,
-                boxShadow: "0 0 15px rgba(236, 72, 153, 0.7)",
-              }}
-              transition={{ type: "spring", stiffness: 300 }}
-              className="bg-gradient-to-r from-pink-500 to-violet-400 px-6 py-3 rounded-full shadow-md shadow-pink-400/30 text-white font-semibold transition-transform"
+              onClick={() => scrollTo("projects")}
+              whileHover={{ scale: 1.02 }}
+              whileTap={{ scale: 0.98 }}
+              className="group relative px-8 py-4 bg-[#ff003c]/10 backdrop-blur-md border border-[#ff3300]/30 rounded-lg overflow-hidden flex items-center gap-3 transition-all hover:bg-[#ff003c]/20 hover:border-[#ff3300]/60 shadow-[0_0_20px_rgba(255,0,60,0.1)] hover:shadow-[0_0_30px_rgba(255,0,60,0.3)]"
             >
-              View Projects
-            </motion.button>
-
-            <motion.button
-              onClick={() => navigate("/contact")}
-              whileHover={{
-                scale: 1.05,
-                boxShadow: "0 0 10px rgba(255, 255, 255, 0.5)",
-              }}
-              transition={{ type: "spring", stiffness: 300 }}
-              className="border border-white/20 px-6 py-3 rounded-full text-white hover:bg-white/10 transition"
-            >
-              Contact Me
+              <Code2 className="w-5 h-5 text-[#ff3300] group-hover:animate-pulse relative z-10" />
+              <span className="font-mono font-medium tracking-widest relative z-10 text-white leading-none">INITIALIZE_PROJECTS</span>
+              <ArrowRight className="w-4 h-4 opacity-50 group-hover:opacity-100 group-hover:translate-x-1 transition-all relative z-10 text-[#ff3300]" />
             </motion.button>
           </div>
-
-          {/* Skills Strip */}
-          <div className="flex flex-wrap justify-center gap-3 mt-10">
-            {["React", "TypeScript", ".NET", "AI/ML", "Clean coding"].map(
-              (skill) => (
-                <motion.span
-                  key={skill}
-                  whileHover={{
-                    scale: 1.15,
-                    backgroundColor: "#ec4899",
-                    color: "#fff",
-                    boxShadow: "0 0 8px rgba(236, 72, 153, 0.7)",
-                  }}
-                  transition={{ type: "spring", stiffness: 300 }}
-                  className="bg-white/10 text-sm px-4 py-1 rounded-full backdrop-blur border border-white/20 cursor-pointer select-none"
-                >
-                  {skill}
-                </motion.span>
-              )
-            )}
-          </div>
-        </FadeInSection>
+        </motion.div>
       </div>
-    </main>
+    </motion.section>
   );
 }

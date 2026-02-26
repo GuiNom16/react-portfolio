@@ -9,40 +9,24 @@ export default function Projects() {
       description:
         "Led a project to reduce time spent by testers creating test cases. Integrated TDD and used Azure OpenAI APIs for automatic test case generation, reducing test case creation time by 60%. Developed with a Flask backend.",
       tech: ["Python", "Flask", "Azure OpenAI", "TDD", "Test Automation"],
-      techImages: [
-        "/tech-images/python_logo.webp",
-        "/tech-images/flask_logo.png",
-        "/tech-images/azure_logo.jpg",
-      ],
     },
     {
       title: "Timesheet Project",
       description:
         "Developed a PowerApps and SharePoint List based solution to solve employee uncompeted project time logging.",
       tech: ["PowerApps", "SharePoint", "Employee Time Tracking"],
-      techImages: ["/tech-images/powerapps_logo.webp"],
     },
     {
       title: "Invasive Starfish Population Control",
       description:
         "CSR project aimed at regulating invasive starfish species population. Developed frontend with React and TypeScript, backend with Node.js.",
       tech: ["React", "TypeScript", "Node.js", "CSR"],
-      techImages: [
-        "/tech-images/react_logo.png",
-        "/tech-images/typescript_logo.png",
-        "/tech-images/nodejs_logo.webp",
-      ],
     },
     {
       title: "Garbage Spotter",
       description:
         "CSR project to locate waste on the island for cleanup efforts. Frontend built with React and TypeScript, backend developed using .NET with hexagonal architecture.",
       tech: ["React", "TypeScript", ".NET", "Hexagonal Architecture", "CSR"],
-      techImages: [
-        "/tech-images/react_logo.png",
-        "/tech-images/typescript_logo.png",
-        "/tech-images/dotnet_logo.png",
-      ],
     },
   ];
 
@@ -59,13 +43,7 @@ export default function Projects() {
         "OpenAI",
         "Hugging Face",
         "React",
-        "Tailwind",
         "Docker",
-      ],
-      techImages: [
-        "/tech-images/dotnet_logo.png",
-        "/tech-images/flask_logo.png",
-        "/tech-images/react_logo.png",
       ],
       github: "https://github.com/GuiNom16/devnotes",
     },
@@ -76,16 +54,9 @@ export default function Projects() {
       tech: [
         "React",
         "TypeScript",
-        "Prompt Engineering",
-        "TailwindCSS",
         "Framer Motion",
         "Vite",
         "LLMs",
-      ],
-      techImages: [
-        "/tech-images/react_logo.png",
-        "/tech-images/typescript_logo.png",
-        "/tech-images/vite_logo.jpg",
       ],
       github: "https://github.com/GuiNom16/promptcraft",
       live: "https://promptcraft-blush.vercel.app/",
@@ -98,14 +69,7 @@ export default function Projects() {
         "React",
         "TypeScript",
         "NPM",
-        "Onboarding",
-        "UX",
         "Component Library",
-      ],
-      techImages: [
-        "/tech-images/react_logo.png",
-        "/tech-images/typescript_logo.png",
-        "/tech-images/npm_logo.png",
       ],
       github: "https://github.com/GuiNom16/react-nudge-ui",
       npm: "https://www.npmjs.com/package/react-nudge-ui",
@@ -119,24 +83,33 @@ export default function Projects() {
         "Node.js",
         "LLM Fine-Tuning",
         "Chatbot",
-        "Mental Health",
-        "Express",
-      ],
-      techImages: [
-        "/tech-images/react_logo.png",
-        "/tech-images/nodejs_logo.webp",
-        "/tech-images/openai_logo.png",
       ],
       github: "https://github.com/GuiNom16/Student-Helper-Chatbot",
     },
   ];
 
   return (
-    <main className="min-h-screen bg-gradient-to-tr from-[#0f172a] via-[#1e293b] to-[#111827] text-white py-16 rounded-lg">
-      <div className="w-full max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <Tabs.Root defaultValue="professional" className="space-y-8">
+    <motion.section
+      id="projects"
+      initial={{ opacity: 0, y: 50 }}
+      whileInView={{ opacity: 1, y: 0 }}
+      transition={{ duration: 0.8 }}
+      viewport={{ once: true, margin: "-100px" }}
+      className="min-h-screen w-full relative z-10 pt-24 pb-32"
+    >
+      <div className="w-full max-w-7xl mx-auto px-6">
+
+        {/* Section Header */}
+        <div className="flex flex-col items-center justify-center mb-16 text-center">
+          <div className="w-12 h-1 bg-[#ff3300] rounded-full mb-4 shadow-[0_0_15px_#ff003c]" />
+          <h2 className="text-4xl md:text-5xl font-black text-transparent bg-clip-text bg-gradient-to-r from-white to-white/60 tracking-tight font-mono uppercase">
+            Project Archives
+          </h2>
+        </div>
+
+        <Tabs.Root defaultValue="professional" className="space-y-12">
           {/* Tabs List */}
-          <Tabs.List className="flex justify-center gap-4 mb-8">
+          <Tabs.List className="flex justify-center gap-4">
             <motion.div
               initial={{ opacity: 0, y: -10 }}
               animate={{ opacity: 1, y: 0 }}
@@ -144,9 +117,9 @@ export default function Projects() {
             >
               <Tabs.Trigger
                 value="professional"
-                className="px-6 py-2 rounded-lg font-medium bg-[#2c2f3f] text-white hover:bg-[#3c3f4f] transition-all duration-200 shadow-sm data-[state=active]:bg-violet-600 data-[state=active]:text-white data-[state=active]:shadow-lg"
+                className="px-6 py-3 rounded-lg font-mono text-sm tracking-widest bg-white/5 border border-white/10 text-white/50 hover:bg-white/10 hover:text-white transition-all duration-300 data-[state=active]:bg-[#ff003c]/10 data-[state=active]:border-[#ff3300]/50 data-[state=active]:text-[#ff3300] data-[state=active]:shadow-[0_0_20px_rgba(255,0,60,0.15)] outline-none"
               >
-                💼 Professional Projects
+                PROFESSIONAL
               </Tabs.Trigger>
             </motion.div>
 
@@ -157,20 +130,20 @@ export default function Projects() {
             >
               <Tabs.Trigger
                 value="personal"
-                className="px-6 py-2 rounded-lg font-medium bg-[#2c2f3f] text-white hover:bg-[#3c3f4f] transition-all duration-200 shadow-sm data-[state=active]:bg-violet-600 data-[state=active]:text-white data-[state=active]:shadow-lg"
+                className="px-6 py-3 rounded-lg font-mono text-sm tracking-widest bg-white/5 border border-white/10 text-white/50 hover:bg-white/10 hover:text-white transition-all duration-300 data-[state=active]:bg-[#ff003c]/10 data-[state=active]:border-[#ff3300]/50 data-[state=active]:text-[#ff3300] data-[state=active]:shadow-[0_0_20px_rgba(255,0,60,0.15)] outline-none"
               >
-                🛠️ Personal Projects
+                PERSONAL
               </Tabs.Trigger>
             </motion.div>
           </Tabs.List>
 
           {/* Professional Tab */}
-          <Tabs.Content value="professional">
+          <Tabs.Content value="professional" className="outline-none">
             <motion.div
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.5 }}
-              className="flex flex-col gap-10 max-w-full"
+              className="grid grid-cols-1 md:grid-cols-2 gap-8 max-w-full"
             >
               {professionalProjects.map((project, idx) => (
                 <ProjectCard key={idx} {...project} />
@@ -179,12 +152,12 @@ export default function Projects() {
           </Tabs.Content>
 
           {/* Personal Tab */}
-          <Tabs.Content value="personal">
+          <Tabs.Content value="personal" className="outline-none">
             <motion.div
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.5 }}
-              className="flex flex-col gap-10 max-w-full"
+              className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 max-w-full"
             >
               {personalProjects.map((project, idx) => (
                 <ProjectCard key={idx} {...project} />
@@ -193,6 +166,6 @@ export default function Projects() {
           </Tabs.Content>
         </Tabs.Root>
       </div>
-    </main>
+    </motion.section>
   );
 }
