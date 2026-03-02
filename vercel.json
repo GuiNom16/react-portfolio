@@ -1,0 +1,9 @@
+{
+    "functions": {
+        "api/*.ts": {
+            "memory": 512,
+            "maxDuration": 20,
+            "includeFiles": "node_modules/@google/genai/**,node_modules/@pinecone-database/pinecone/**,node_modules/@vercel/node/**"
+        }
+    }
+}

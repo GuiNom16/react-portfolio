@@ -1,6 +1,7 @@
 import { useState, useEffect } from "react";
-import { Home, FolderGit2, Terminal, Mail, Bot } from "lucide-react";
+import { Home, FolderGit2, Terminal, Mail, Bot, ArrowLeft } from "lucide-react";
 import { motion } from "framer-motion";
+import { Link, useLocation, useNavigate } from "react-router-dom";
 
 const navItems = [
   { id: "home", label: "Home", icon: Home },
@@ -11,8 +12,13 @@ const navItems = [
 
 export default function Navbar() {
   const [activeSection, setActiveSection] = useState("home");
+  const location = useLocation();
+  const navigate = useNavigate();
+  const isAIPage = location.pathname === "/ai";
 
   useEffect(() => {
+    if (isAIPage) return;
+
     const handleScroll = () => {
       const sections = navItems.map((item) => document.getElementById(item.id));
       const scrollPosition = window.scrollY + window.innerHeight / 3;
@@ -28,18 +34,52 @@ export default function Navbar() {
 
     window.addEventListener("scroll", handleScroll);
     return () => window.removeEventListener("scroll", handleScroll);
-  }, []);
+  }, [isAIPage]);
 
   const handleNavClick = (e: React.MouseEvent<HTMLAnchorElement>, id: string) => {
     e.preventDefault();
     const section = document.getElementById(id);
     if (section) {
-      window.scrollTo({
-        top: section.offsetTop,
-        behavior: "smooth",
-      });
+      window.scrollTo({ top: section.offsetTop, behavior: "smooth" });
     }
   };
+
+  // On the AI page, show a simplified "back" dock
+  if (isAIPage) {
+    return (
+      <motion.div
+        initial={{ y: 100, opacity: 0 }}
+        animate={{ y: 0, opacity: 1 }}
+        transition={{ delay: 0.3, type: "spring", stiffness: 200, damping: 20 }}
+        className="fixed bottom-6 left-1/2 -translate-x-1/2 z-50 pointer-events-auto"
+      >
+        <div className="glass-panel rounded-full px-6 py-3 flex items-center gap-4 border-white/10 bg-black/60 shadow-[0_0_30px_rgba(255,51,0,0.1)]">
+          <button
+            onClick={() => navigate("/")}
+            className="relative group flex flex-col items-center justify-center w-12 h-12 rounded-full text-white/40 hover:text-white transition-colors"
+            aria-label="Back to Portfolio"
+          >
+            <ArrowLeft className="w-5 h-5 relative z-10" />
+            <span className="absolute -top-12 scale-0 group-hover:scale-100 transition-transform bg-black/90 backdrop-blur-md border border-[#ff3300]/30 text-white text-[10px] tracking-widest px-3 py-1.5 rounded-md whitespace-nowrap font-mono shadow-[0_0_15px_rgba(255,0,60,0.3)]">
+              BACK
+            </span>
+          </button>
+
+          <div className="w-[1px] h-8 bg-white/10" />
+
+          {/* AI Active indicator */}
+          <div className="relative flex flex-col items-center justify-center w-12 h-12 rounded-full text-[#ff3300]">
+            <div className="absolute inset-0 bg-[#ff003c]/20 rounded-full border border-[#ff3300]/40 shadow-[0_0_20px_rgba(255,51,0,0.4)]" />
+            <Bot className="w-5 h-5 relative z-10" />
+            <span className="absolute -top-12 bg-black/90 backdrop-blur-md border border-[#ff3300]/40 text-[#ff3300] text-[10px] tracking-widest px-3 py-1.5 rounded-md whitespace-nowrap font-mono shadow-[0_0_15px_rgba(255,0,60,0.3)] flex items-center gap-2">
+              <span className="w-1.5 h-1.5 rounded-full bg-[#ff3300] animate-pulse" />
+              [ AI_AGENT // ONLINE ]
+            </span>
+          </div>
+        </div>
+      </motion.div>
+    );
+  }
 
   return (
     <motion.div
@@ -78,22 +118,24 @@ export default function Navbar() {
 
         <div className="w-[1px] h-8 bg-white/10 mx-2" />
 
-        {/* AI Agent Placeholder Button */}
-        <button
-          className="relative group flex flex-col items-center justify-center w-12 h-12 rounded-full text-white/30 hover:text-[#ff3300] transition-colors cursor-not-allowed"
-          aria-label="AI Agent Offline"
+        {/* AI Agent — now ONLINE and clickable */}
+        <Link
+          to="/ai"
+          className="relative group flex flex-col items-center justify-center w-12 h-12 rounded-full text-white/40 hover:text-[#ff3300] transition-colors"
+          aria-label="Open AI Representative"
         >
-          {/* Subtle offline pulse ring */}
-          <div className="absolute inset-0 rounded-full border border-white/5 group-hover:border-[#ff3300]/20 transition-colors" />
+          {/* Pulsing online ring */}
+          <div className="absolute inset-0 rounded-full border border-white/5 group-hover:border-[#ff3300]/40 transition-colors" />
+          <div className="absolute inset-0 rounded-full border border-transparent group-hover:border-[#ff3300]/20 group-hover:shadow-[0_0_15px_rgba(255,51,0,0.3)] transition-all" />
 
-          <Bot className="w-5 h-5 group-hover:animate-pulse group-hover:drop-shadow-[0_0_8px_rgba(255,51,0,0.8)]" />
+          <Bot className="w-5 h-5 relative z-10 group-hover:drop-shadow-[0_0_8px_rgba(255,51,0,0.8)]" />
 
-          {/* Futuristic Tooltip */}
+          {/* Tooltip */}
           <span className="absolute -top-12 scale-0 group-hover:scale-100 transition-transform bg-black/90 backdrop-blur-md border border-[#ff3300]/40 text-[#ff3300] text-[10px] tracking-widest px-3 py-1.5 rounded-md whitespace-nowrap font-mono shadow-[0_0_15px_rgba(255,0,60,0.3)] flex items-center gap-2">
             <span className="w-1.5 h-1.5 rounded-full bg-[#ff3300] animate-pulse" />
-            [ AI_AGENT // OFFLINE ]
+            [ AI_AGENT // ONLINE ]
           </span>
-        </button>
+        </Link>
       </div>
     </motion.div>
   );
