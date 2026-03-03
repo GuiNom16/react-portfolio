@@ -1,8 +1,9 @@
 import { useRef, useEffect, useState, type KeyboardEvent } from "react";
 import { motion, AnimatePresence } from "framer-motion";
-import { Send, Bot, Zap } from "lucide-react";
+import { Send, Zap } from "lucide-react";
 import ChatMessage, { TypingIndicator } from "./ChatMessage";
 import type { Message } from "./ChatMessage";
+import AnimatedAvatar from "./AnimatedAvatar";
 
 interface ChatPanelProps {
     messages: Message[];
@@ -49,7 +50,23 @@ export default function ChatPanel({ messages, isLoading, isStreaming, onSend }: 
         onSend(text);
     };
 
-    const isLastMessageStreaming = isStreaming && messages[messages.length - 1]?.role === "assistant";
+    // Basic sentiment calculation based on the latest message
+    const getEmotion = (): "neutral" | "unhappy" | "happy" => {
+        const lastMsg = messages[messages.length - 1];
+        if (!lastMsg || lastMsg.role !== "assistant") return "neutral";
+
+        const text = lastMsg.content.toLowerCase();
+        const unhappyWords = ["sorry", "unfortunately", "sad", "issue", "bad", "error", "fail"];
+        if (unhappyWords.some(w => text.includes(w))) return "unhappy";
+
+        const happyWords = ["great", "awesome", "love", "happy", "excellent", "excited", "glad", "clean"];
+        if (happyWords.some(w => text.includes(w))) return "happy";
+
+        return "neutral";
+    };
+
+    const emotion = getEmotion();
+    const avatarStatus = isStreaming ? "replying" : isLoading ? "thinking" : "idle";
 
     return (
         <motion.div
@@ -59,16 +76,10 @@ export default function ChatPanel({ messages, isLoading, isStreaming, onSend }: 
             className="flex flex-col h-full"
         >
             {/* Header */}
-            <div className="glass-panel rounded-2xl rounded-b-none p-4 border-white/10 border-b-white/5 flex items-center gap-3 flex-shrink-0">
-                <div className="relative">
-                    <div className="w-9 h-9 rounded-full bg-[#ff003c]/20 border border-[#ff3300]/40 flex items-center justify-center">
-                        <Bot className="w-4.5 h-4.5 text-[#ff3300]" />
-                    </div>
-                    {/* Online dot */}
-                    <div className="absolute -bottom-0.5 -right-0.5 w-2.5 h-2.5 rounded-full bg-[#00ff66] border border-black shadow-[0_0_6px_rgba(0,255,102,0.8)]" />
-                </div>
+            <div className="glass-panel rounded-2xl rounded-b-none p-4 border-white/10 border-b-white/5 flex items-center gap-4 flex-shrink-0">
+                <AnimatedAvatar status={avatarStatus} emotion={emotion} />
 
-                <div className="flex-1">
+                <div className="flex-1 ml-2">
                     <p className="font-mono text-xs tracking-widest text-[#ff3300] leading-none mb-0.5">
                         THE REPRESENTATIVE
                     </p>
@@ -85,13 +96,16 @@ export default function ChatPanel({ messages, isLoading, isStreaming, onSend }: 
 
             {/* Messages */}
             <div className="flex-1 overflow-y-auto p-4 space-y-4 glass-panel rounded-none border-x border-x-white/10 border-y-0 scrollbar-hide min-h-0">
-                {messages.map((msg, idx) => (
-                    <ChatMessage
-                        key={msg.id}
-                        message={msg}
-                        isLatest={idx === messages.length - 1 && isLastMessageStreaming}
-                    />
-                ))}
+                {messages.map((msg, idx) => {
+                    const isLastMessageStreaming = isStreaming && msg.role === "assistant";
+                    return (
+                        <ChatMessage
+                            key={msg.id}
+                            message={msg}
+                            isLatest={idx === messages.length - 1 && isLastMessageStreaming}
+                        />
+                    );
+                })}
 
                 <AnimatePresence>
                     {isLoading && !isStreaming && <TypingIndicator />}

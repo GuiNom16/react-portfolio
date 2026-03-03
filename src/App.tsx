@@ -1,12 +1,9 @@
-import { lazy, Suspense } from "react";
 import { Routes, Route } from "react-router-dom";
 import Layout from "./components/Layout";
 import LivePlayground from "./pages/LivePlayground";
 import Home from "./pages/Home";
 import Projects from "./pages/Projects";
 import Contact from "./pages/Contact";
-
-const AIPage = lazy(() => import("./pages/AIPage"));
 
 const playgroundCode = `
 function Demo() {
@@ -73,22 +70,6 @@ function App() {
               <Contact />
             </div>
           </Layout>
-        }
-      />
-      <Route
-        path="/ai"
-        element={
-          <Suspense
-            fallback={
-              <div className="min-h-screen bg-black flex items-center justify-center">
-                <div className="text-[#ff3300] font-mono text-sm tracking-widest animate-pulse">
-                  INITIALIZING_AGENT...
-                </div>
-              </div>
-            }
-          >
-            <AIPage />
-          </Suspense>
         }
       />
     </Routes>
