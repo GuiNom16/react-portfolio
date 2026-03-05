@@ -18,8 +18,8 @@ export default function Contact() {
       <div className="absolute inset-0 bg-[radial-gradient(circle_at_top,#1a0005_0%,transparent_60%)] pointer-events-none" />
 
       {/* Floating Blurred Circles for background effect */}
-      <div className={`absolute top-10 left-10 w-96 h-96 transition-colors duration-1000 ${isDeepWorkMode ? 'bg-[#ff003c]' : 'bg-[#ff3300]'} rounded-full blur-[150px] opacity-10 pointer-events-none`} />
-      <div className={`absolute bottom-10 right-10 w-96 h-96 transition-colors duration-1000 ${isDeepWorkMode ? 'bg-[#00ff88]' : 'bg-[#ff003c]'} rounded-full blur-[150px] opacity-10 pointer-events-none`} />
+      <div className={`absolute top-10 left-10 w-96 h-96 transition-all duration-1000 ${isDeepWorkMode ? 'bg-[radial-gradient(circle_at_center,_#ff003c_0%,_transparent_70%)]' : 'bg-[radial-gradient(circle_at_center,_#ff3300_0%,_transparent_70%)]'} opacity-20 pointer-events-none will-change-transform`} />
+      <div className={`absolute bottom-10 right-10 w-96 h-96 transition-all duration-1000 ${isDeepWorkMode ? 'bg-[radial-gradient(circle_at_center,_#00ff88_0%,_transparent_70%)]' : 'bg-[radial-gradient(circle_at_center,_#ff003c_0%,_transparent_70%)]'} opacity-20 pointer-events-none will-change-transform`} />
 
       {/* Inner Constrained Grid Container */}
       <div className="max-w-7xl mx-auto w-full px-6 relative z-10">
@@ -35,25 +35,25 @@ export default function Contact() {
                   animate={{ opacity: 1, scale: 1, filter: "blur(0px)" }}
                   exit={{ opacity: 0, scale: 0.95, filter: "blur(10px)" }}
                   transition={{ duration: 0.5 }}
-                  className="flex flex-col items-center justify-center text-center p-10 md:p-14 bg-black/60 backdrop-blur-xl border border-white/5 rounded-2xl shadow-[0_0_50px_rgba(255,51,0,0.05)] h-full absolute inset-0 w-full"
+                  className="flex flex-col items-center justify-center text-center p-6 sm:p-10 md:p-14 bg-black/60 backdrop-blur-xl border border-white/5 rounded-2xl shadow-[0_0_50px_rgba(255,51,0,0.05)] h-full lg:absolute inset-0 w-full"
                 >
-                  <div className="w-full space-y-10">
+                  <div className="w-full space-y-8 sm:space-y-10">
                     {/* Headline */}
                     <div className="space-y-6">
                       <div className="inline-flex items-center gap-2 bg-[#ff3300]/10 border border-[#ff3300]/30 px-4 py-1.5 rounded-full">
                         <span className="w-2 h-2 rounded-full bg-[#ff3300] animate-pulse" />
                         <span className="text-[#ff3300] text-[10px] font-mono tracking-widest uppercase">Connection Protocol</span>
                       </div>
-                      <h1 className="text-4xl sm:text-5xl font-black tracking-tight font-sans text-transparent bg-clip-text bg-gradient-to-br from-white to-white/60">
+                      <h1 className="text-3xl sm:text-4xl md:text-5xl font-black tracking-tight font-sans text-transparent bg-clip-text bg-gradient-to-br from-white to-white/60 leading-tight">
                         Let’s Connect
                       </h1>
-                      <p className="text-white/60 text-base sm:text-lg leading-relaxed max-w-xl mx-auto font-sans">
-                        I’m actively looking for full-time opportunities in{" "}
+                      <p className="text-white/60 text-sm sm:text-base md:text-lg leading-relaxed max-w-xl mx-auto font-sans">
+                        I’m always open to hearing about{" "}
                         <span className="text-[#ff3300] font-medium border-b border-[#ff3300]/40 pb-1">
-                          Full-stack development
+                          cool ideas and collaborations
                         </span>{" "}
-                        — especially roles where I can work on meaningful products,
-                        collaborate closely with visionary teams, and keep growing.
+                        — whether you want to build something together, discuss new tech,
+                        or just share a visionary project, I'd love to chat.
                       </p>
                     </div>
 
@@ -83,7 +83,7 @@ export default function Contact() {
                       <div className="inline-flex flex-wrap gap-2 items-center justify-center">
                         <FiTerminal className="text-[#ff003c] shrink-0" />
                         <span className="break-words uppercase">
-                          P.S. I take on occasional freelance work. Send a ping.
+                          P.S. Got a wild project in mind? Let's make it happen.
                         </span>
                       </div>
                     </div>
@@ -96,7 +96,7 @@ export default function Contact() {
                   animate={{ opacity: 1, scale: 1, filter: "blur(0px)" }}
                   exit={{ opacity: 0, scale: 0.95, filter: "blur(20px)" }}
                   transition={{ duration: 0.8, type: "spring", bounce: 0.4 }}
-                  className="flex flex-col items-center justify-center bg-black/80 backdrop-blur-3xl border-2 border-green-500/50 rounded-2xl shadow-[0_0_100px_rgba(0,255,100,0.2)] h-full absolute inset-0 w-full overflow-hidden p-2"
+                  className="flex flex-col items-center justify-center bg-black/80 backdrop-blur-3xl border-2 border-green-500/50 rounded-2xl shadow-[0_0_100px_rgba(0,255,100,0.2)] h-full lg:absolute inset-0 w-full overflow-hidden p-2"
                 >
                   {/* Decorative Lofi Terminal Header */}
                   <div className="w-full bg-black/50 border-b border-green-500/30 px-4 py-2 flex items-center justify-between z-10 rounded-t-xl mb-2">
@@ -141,16 +141,16 @@ export default function Contact() {
             >
 
               <div className="space-y-4">
-                <div className={`inline-flex items-center justify-center w-16 h-16 rounded-2xl bg-gradient-to-br shadow-xl mb-4 transition-colors duration-700 ${isDeepWorkMode ? 'from-green-500/20 to-green-600/5 shadow-[0_0_30px_rgba(0,255,100,0.3)]' : 'from-[#ff3300]/20 to-[#ff003c]/5'
+                <div className={`inline-flex items-center justify-center w-12 h-12 sm:w-16 sm:h-16 rounded-2xl bg-gradient-to-br shadow-xl mb-2 sm:mb-4 transition-colors duration-700 ${isDeepWorkMode ? 'from-green-500/20 to-green-600/5 shadow-[0_0_30px_rgba(0,255,100,0.3)]' : 'from-[#ff3300]/20 to-[#ff003c]/5'
                   }`}>
-                  <FiPower className={`w-8 h-8 transition-colors duration-700 ${isDeepWorkMode ? 'text-green-500' : 'text-[#ff3300]'}`} />
+                  <FiPower className={`w-6 h-6 sm:w-8 sm:h-8 transition-colors duration-700 ${isDeepWorkMode ? 'text-green-500' : 'text-[#ff3300]'}`} />
                 </div>
 
-                <h2 className="text-3xl font-black tracking-tight font-sans text-transparent bg-clip-text bg-gradient-to-br from-white to-white/60">
+                <h2 className="text-2xl sm:text-3xl font-black tracking-tight font-sans text-transparent bg-clip-text bg-gradient-to-br from-white to-white/60">
                   Focus Engine
                 </h2>
 
-                <p className="text-white/40 text-sm font-mono uppercase tracking-widest max-w-xs mx-auto leading-relaxed h-[60px]">
+                <p className="text-white/40 text-xs sm:text-sm font-mono uppercase tracking-widest max-w-xs mx-auto leading-relaxed h-auto sm:h-[60px]">
                   {isDeepWorkMode
                     ? "Warning: Sensory isolation protocols engaged. No distractions allowed."
                     : "Activate to initiate deep work sequence. Use with extreme caution."}

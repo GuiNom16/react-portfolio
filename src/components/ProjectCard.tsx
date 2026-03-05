@@ -30,7 +30,7 @@ export default function ProjectCard({
         className="glass-panel w-full h-full rounded-xl p-8 flex flex-col justify-between border-white/5 bg-black/40 relative overflow-hidden transition-all duration-700 hover:border-[#ff3300]/40 hover:shadow-[0_0_30px_rgba(255,0,60,0.15)]"
       >
         {/* Subtle Background Glow on Hover */}
-        <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-full h-full bg-[#ff003c] rounded-full blur-[120px] opacity-0 group-hover:opacity-10 transition-opacity duration-700 pointer-events-none" />
+        <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-full h-full bg-[radial-gradient(circle_at_center,_#ff003c_0%,_transparent_70%)] opacity-0 group-hover:opacity-20 transition-opacity duration-700 pointer-events-none" />
 
         {/* Content front */}
         <div className="relative z-10 flex-1 flex flex-col transition-all duration-500 group-hover:scale-[0.98] group-hover:opacity-30">

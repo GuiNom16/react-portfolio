@@ -102,7 +102,7 @@ export default function Projects() {
         {/* Section Header */}
         <div className="flex flex-col items-center justify-center mb-16 text-center">
           <div className="w-12 h-1 bg-[#ff3300] rounded-full mb-4 shadow-[0_0_15px_#ff003c]" />
-          <h2 className="text-4xl md:text-5xl font-black text-transparent bg-clip-text bg-gradient-to-r from-white to-white/60 tracking-tight font-mono uppercase">
+          <h2 className="text-3xl sm:text-4xl md:text-5xl font-black text-transparent bg-clip-text bg-gradient-to-r from-white to-white/60 tracking-tight font-mono uppercase">
             Project Archives
           </h2>
         </div>

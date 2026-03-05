@@ -116,30 +116,38 @@ const NeuralNetwork: React.FC<NeuralNetworkProps> = ({ count, maxDistance, speed
         // Optimized connection calculation (only check a window of nodes or limited connections for performance)
         // For visual quality with high count, we iterate carefully.
         const skip = Math.max(1, Math.floor(count / 150)); // Optimization: check fewer neighbors if count is very high
+        const maxDistSq = maxDistance * maxDistance;
 
         for (let i = 0; i < count; i += skip) {
             let connections = 0;
+            const pi = particles[i];
+
             for (let j = i + 1; j < count; j++) {
                 // Limit connections per node to keep line density readable and performant
                 if (connections > 6) break;
 
-                const dx = particles[i].x - particles[j].x;
-                const dy = particles[i].y - particles[j].y;
-                const dz = particles[i].z - particles[j].z;
+                const pj = particles[j];
+                const dx = pi.x - pj.x;
+                const dy = pi.y - pj.y;
+                const dz = pi.z - pj.z;
+
+                // Quick boundary check before full distance calculation to save multiplications
+                if (Math.abs(dx) > maxDistance || Math.abs(dy) > maxDistance || Math.abs(dz) > maxDistance) continue;
+
                 const distSq = dx * dx + dy * dy + dz * dz;
 
-                if (distSq < maxDistance * maxDistance) {
-                    const dist = Math.sqrt(distSq);
-                    const alpha = Math.pow(1.0 - dist / maxDistance, 2); // Quadratic fade for smoother "connect/disconnect"
+                if (distSq < maxDistSq) {
+                    // Optimized alpha mapping (avoiding sqrt and pow for performance)
+                    const alpha = 1.0 - (distSq / maxDistSq);
 
                     if (lineIdx + 6 < linePositions.length) {
-                        linePositions[lineIdx] = particles[i].x;
-                        linePositions[lineIdx + 1] = particles[i].y;
-                        linePositions[lineIdx + 2] = particles[i].z;
+                        linePositions[lineIdx] = pi.x;
+                        linePositions[lineIdx + 1] = pi.y;
+                        linePositions[lineIdx + 2] = pi.z;
 
-                        linePositions[lineIdx + 3] = particles[j].x;
-                        linePositions[lineIdx + 4] = particles[j].y;
-                        linePositions[lineIdx + 5] = particles[j].z;
+                        linePositions[lineIdx + 3] = pj.x;
+                        linePositions[lineIdx + 4] = pj.y;
+                        linePositions[lineIdx + 5] = pj.z;
 
                         const intensity = alpha * 0.8;
                         lineColors[lineIdx] = lineColor.r * intensity;
@@ -168,13 +176,11 @@ const NeuralNetwork: React.FC<NeuralNetworkProps> = ({ count, maxDistance, speed
 
     return (
         <group>
-            {/* Spherical Nodes using InstancedMesh for performance */}
+            {/* Low-poly Nodes using InstancedMesh for performance */}
             <instancedMesh ref={instancedNodesRef} args={[undefined, undefined, count]}>
-                <sphereGeometry args={[1, 12, 12]} />
-                <meshStandardMaterial
+                <icosahedronGeometry args={[1, 1]} />
+                <meshBasicMaterial
                     color="#ff3300" // Red theme
-                    emissive="#ff003c" // Deep red emissive
-                    emissiveIntensity={2}
                     toneMapped={false}
                 />
             </instancedMesh>

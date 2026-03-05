@@ -1,10 +1,11 @@
+import { Suspense, lazy } from "react";
 import { Routes, Route } from "react-router-dom";
 import Layout from "./components/Layout";
-import LivePlayground from "./pages/LivePlayground";
-import Home from "./pages/Home";
-import Projects from "./pages/Projects";
-import Contact from "./pages/Contact";
 
+const Home = lazy(() => import("./pages/Home"));
+const Projects = lazy(() => import("./pages/Projects"));
+const LivePlayground = lazy(() => import("./pages/LivePlayground"));
+const Contact = lazy(() => import("./pages/Contact"));
 const playgroundCode = `
 function Demo() {
   return (
@@ -63,12 +64,14 @@ function App() {
         path="/"
         element={
           <Layout>
-            <div className="flex flex-col w-full relative">
-              <Home />
-              <Projects />
-              <LivePlayground code={playgroundCode} />
-              <Contact />
-            </div>
+            <Suspense fallback={<div className="min-h-screen bg-black w-full flex items-center justify-center text-[#ff3300] font-mono animate-pulse">SYSTEM.LOADING...</div>}>
+              <div className="flex flex-col w-full relative">
+                <Home />
+                <Projects />
+                <LivePlayground code={playgroundCode} />
+                <Contact />
+              </div>
+            </Suspense>
           </Layout>
         }
       />

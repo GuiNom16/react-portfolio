@@ -3,6 +3,7 @@ import { motion } from "framer-motion";
 import { ArrowRight, Code2, Terminal } from "lucide-react";
 import { Canvas } from "@react-three/fiber";
 import NeuralNetwork from "@/components/NeuralNetwork";
+import { useInView } from "react-intersection-observer";
 
 export default function Home() {
   const [text] = useTypewriter({
@@ -20,6 +21,11 @@ export default function Home() {
     if (section) section.scrollIntoView({ behavior: "smooth" });
   };
 
+  const { ref: homeRef, inView } = useInView({
+    threshold: 0,
+    rootMargin: '100px 0px 100px 0px' // Keep alive slightly out of bounds
+  });
+
   return (
     <motion.section
       id="home"
@@ -29,15 +35,17 @@ export default function Home() {
       className="min-h-screen w-full flex flex-col items-center justify-center text-center px-6 pt-24 pb-16 text-white relative overflow-hidden"
     >
       {/* 3D Neural Network Background */}
-      <div className="absolute inset-0 w-full h-full -z-10 pointer-events-none">
-        <Canvas camera={{ position: [0, 0, 50], fov: 60 }}>
-          <NeuralNetwork count={400} maxDistance={15} speed={1.5} />
-        </Canvas>
+      <div ref={homeRef} className="absolute inset-0 w-full h-full -z-10 pointer-events-none">
+        {inView && (
+          <Canvas camera={{ position: [0, 0, 50], fov: 60 }}>
+            <NeuralNetwork count={200} maxDistance={15} speed={1.5} />
+          </Canvas>
+        )}
       </div>
 
       {/* Deep Red/Orange Glowing Orbs for Techy Inspiration */}
-      <div className="absolute top-1/4 left-1/4 w-[400px] h-[400px] bg-[#ff3300] rounded-full blur-[150px] opacity-10 pointer-events-none -z-10 mix-blend-screen" />
-      <div className="absolute bottom-1/4 right-1/4 w-[500px] h-[500px] bg-[#ff003c] rounded-full blur-[180px] opacity-10 pointer-events-none -z-10 mix-blend-screen" />
+      <div className="absolute top-1/4 left-1/4 w-[400px] h-[400px] bg-[radial-gradient(circle_at_center,_#ff3300_0%,_transparent_70%)] opacity-20 pointer-events-none -z-10 mix-blend-screen will-change-transform" />
+      <div className="absolute bottom-1/4 right-1/4 w-[500px] h-[500px] bg-[radial-gradient(circle_at_center,_#ff003c_0%,_transparent_70%)] opacity-20 pointer-events-none -z-10 mix-blend-screen will-change-transform" />
 
       {/* Content Container */}
       <div className="relative w-full max-w-4xl mx-auto flex flex-col items-center justify-center z-10">
@@ -53,7 +61,7 @@ export default function Home() {
               <img
                 src="/profilepic.jpg"
                 alt="Guillaume Nombro"
-                className="w-full h-full object-cover mix-blend-luminosity opacity-90 transition-all duration-700 ease-in-out group-hover:scale-105 group-hover:mix-blend-normal group-hover:opacity-100"
+                className="w-full h-full object-cover transition-all duration-700 ease-in-out mix-blend-normal opacity-100 md:mix-blend-luminosity md:opacity-90 group-hover:scale-105 group-hover:mix-blend-normal group-hover:opacity-100"
               />
             </div>
           </div>
@@ -70,7 +78,7 @@ export default function Home() {
             <span>SYSTEM.INITIALIZE()</span>
           </div>
 
-          <h1 className="text-6xl md:text-8xl font-black tracking-tighter text-transparent bg-clip-text bg-gradient-to-r from-white via-white/90 to-white/40 mb-2 drop-shadow-2xl">
+          <h1 className="text-5xl sm:text-7xl md:text-8xl font-black tracking-tighter text-transparent bg-clip-text bg-gradient-to-r from-white via-white/90 to-white/40 mb-2 drop-shadow-2xl leading-none">
             Jeremie.dev
           </h1>
 
@@ -81,7 +89,7 @@ export default function Home() {
             </h2>
           </div>
 
-          <p className="text-lg md:text-xl text-white/50 max-w-2xl mx-auto font-sans leading-relaxed tracking-wide">
+          <p className="text-base md:text-lg lg:text-xl text-white/50 max-w-2xl mx-auto font-sans leading-relaxed tracking-wide px-4 sm:px-0">
             Architecting modern, scalable web ecosystems. Merging high-performance <span className="text-white/90 font-medium">.NET</span> microservices with fluid <span className="text-white/90 font-medium">React</span> interactive experiences.
           </p>
 

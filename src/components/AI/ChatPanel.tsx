@@ -14,7 +14,6 @@ interface ChatPanelProps {
 
 const SUGGESTIONS = [
     "What's Jeremie's main tech stack?",
-    "Tell me about ProphetRFP",
     "What are your hobbies outside coding?",
     "How do you approach clean code?",
 ];
