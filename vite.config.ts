@@ -19,4 +19,16 @@ export default defineConfig({
       },
     },
   },
+  build: {
+    rollupOptions: {
+      output: {
+        manualChunks: {
+          "vendor-three": ["three", "@react-three/fiber", "@react-three/drei"],
+          "vendor-live": ["react-live"],
+          "vendor-particles": ["tsparticles", "@tsparticles/react", "@tsparticles/slim"],
+          "vendor-framer": ["framer-motion"],
+        },
+      },
+    },
+  },
 });

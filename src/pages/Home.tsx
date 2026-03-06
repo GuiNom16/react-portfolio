@@ -1,11 +1,22 @@
+import { useState, useEffect, Suspense, lazy } from "react";
 import { useTypewriter, Cursor } from "react-simple-typewriter";
-import { motion } from "framer-motion";
+import { motion, AnimatePresence } from "framer-motion";
 import { ArrowRight, Code2, Terminal } from "lucide-react";
-import { Canvas } from "@react-three/fiber";
-import NeuralNetwork from "@/components/NeuralNetwork";
 import { useInView } from "react-intersection-observer";
 
+// Lazy load Canvas and NeuralNetwork to keep them out of the Home chunk's entry point
+const DynamicCanvas = lazy(() => import("@react-three/fiber").then(m => ({ default: m.Canvas })));
+const NeuralNetwork = lazy(() => import("@/components/NeuralNetwork"));
+
 export default function Home() {
+  const [showCanvas, setShowCanvas] = useState(false);
+
+  useEffect(() => {
+    // Delay canvas mounting slightly to prioritize LCP and initial interaction
+    const timer = setTimeout(() => setShowCanvas(true), 2000);
+    return () => clearTimeout(timer);
+  }, []);
+
   const [text] = useTypewriter({
     words: [
       "REACT SPECIALIST;",
@@ -23,7 +34,7 @@ export default function Home() {
 
   const { ref: homeRef, inView } = useInView({
     threshold: 0,
-    rootMargin: '100px 0px 100px 0px' // Keep alive slightly out of bounds
+    rootMargin: '100px 0px 100px 0px'
   });
 
   return (
@@ -36,11 +47,23 @@ export default function Home() {
     >
       {/* 3D Neural Network Background */}
       <div ref={homeRef} className="absolute inset-0 w-full h-full -z-10 pointer-events-none">
-        {inView && (
-          <Canvas camera={{ position: [0, 0, 50], fov: 60 }}>
-            <NeuralNetwork count={200} maxDistance={15} speed={1.5} />
-          </Canvas>
-        )}
+        <AnimatePresence>
+          {inView && showCanvas && (
+            <motion.div
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              exit={{ opacity: 0 }}
+              transition={{ duration: 2, ease: "easeOut" }}
+              className="w-full h-full"
+            >
+              <Suspense fallback={null}>
+                <DynamicCanvas camera={{ position: [0, 0, 50], fov: 60 }}>
+                  <NeuralNetwork count={200} maxDistance={15} speed={1.5} />
+                </DynamicCanvas>
+              </Suspense>
+            </motion.div>
+          )}
+        </AnimatePresence>
       </div>
 
       {/* Deep Red/Orange Glowing Orbs for Techy Inspiration */}

@@ -57,6 +57,28 @@ function Demo() {
 render(<Demo />);
 `;
 
+import { useInView } from "react-intersection-observer";
+
+const LazySection = ({ children, height = "100vh" }: { children: React.ReactNode, height?: string }) => {
+  const { ref, inView } = useInView({
+    triggerOnce: true,
+    rootMargin: "100px 0px", // Reduced margin to prevent eager loading of next section
+  });
+
+  return (
+    <div ref={ref} className="w-full relative" style={{ minHeight: inView ? "auto" : height }}>
+      {inView ? children : (
+        <div
+          className="w-full flex items-center justify-center bg-black/20"
+          style={{ height }}
+        >
+          <div className="w-8 h-8 rounded-full border-2 border-[#ff3300]/20 border-t-[#ff3300] animate-spin" />
+        </div>
+      )}
+    </div>
+  );
+};
+
 function App() {
   return (
     <Routes>
@@ -66,10 +88,18 @@ function App() {
           <Layout>
             <Suspense fallback={<div className="min-h-screen bg-black w-full flex items-center justify-center text-[#ff3300] font-mono animate-pulse">SYSTEM.LOADING...</div>}>
               <div className="flex flex-col w-full relative">
-                <Home />
-                <Projects />
-                <LivePlayground code={playgroundCode} />
-                <Contact />
+                <LazySection height="100vh">
+                  <Home />
+                </LazySection>
+                <LazySection height="100vh">
+                  <Projects />
+                </LazySection>
+                <LazySection height="85vh">
+                  <LivePlayground code={playgroundCode} />
+                </LazySection>
+                <LazySection height="100vh">
+                  <Contact />
+                </LazySection>
               </div>
             </Suspense>
           </Layout>
