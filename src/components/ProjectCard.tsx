@@ -89,7 +89,7 @@ export default function ProjectCard({
         {/* Action Links (Always visible at bottom, but lifted above overlay) */}
         <div className="relative z-30 flex items-center justify-between mt-auto pt-4 border-t border-white/5">
           <div className="text-[10px] text-white/30 font-mono tracking-widest">
-            ID:{Math.random().toString(36).substring(7).toUpperCase()}
+            ID:{title.toUpperCase().replace(/\s+/g, '_')}_{tech.length}
           </div>
 
           <div className="flex gap-4 text-white/50 text-xl pointer-events-auto">

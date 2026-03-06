@@ -1,10 +1,10 @@
-import { useState } from "react";
+import { useUI } from "../context/UIContext";
 import Footer from "./Footer";
 import Navbar from "./Navbar";
 import AIChatOverlay from "./AI/AIChatOverlay";
 
 export default function Layout({ children }: { children: React.ReactNode }) {
-  const [isChatOpen, setIsChatOpen] = useState(false);
+  const { isChatOpen, setIsChatOpen } = useUI();
 
   return (
     <div className="flex flex-col min-h-screen bg-animated-gradient text-foreground relative z-0">

@@ -20,18 +20,18 @@ export default function AIChatOverlay({ isOpen, onClose }: AIChatOverlayProps) {
                         initial={{ opacity: 0 }}
                         animate={{ opacity: 1 }}
                         exit={{ opacity: 0 }}
-                        transition={{ duration: 0.3 }}
+                        transition={{ duration: 0.2 }}
                         onClick={onClose}
                         className="fixed inset-0 bg-black/40 backdrop-blur-sm z-[100]"
                     />
 
                     {/* Sliding Drawer */}
                     <motion.div
-                        initial={{ x: "100%", opacity: 0 }}
-                        animate={{ x: 0, opacity: 1 }}
-                        exit={{ x: "100%", opacity: 0 }}
-                        transition={{ type: "spring", damping: 25, stiffness: 200 }}
-                        className="fixed top-0 right-0 bottom-0 w-full sm:w-[450px] md:w-[500px] lg:w-[600px] z-[101] bg-black/80 backdrop-blur-xl border-l border-white/10 shadow-2xl flex flex-col"
+                        initial={{ x: "100%" }}
+                        animate={{ x: 0 }}
+                        exit={{ x: "100%" }}
+                        transition={{ type: "spring", damping: 30, stiffness: 300 }}
+                        className="fixed top-0 right-0 bottom-0 w-full sm:w-[450px] md:w-[500px] lg:w-[600px] z-[101] bg-black/80 backdrop-blur-md border-l border-white/10 shadow-2xl flex flex-col will-change-transform"
                     >
                         {/* Header Area with Close Button */}
                         <div className="flex justify-end p-4 absolute top-0 right-0 z-[102]">

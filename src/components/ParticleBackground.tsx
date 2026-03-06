@@ -1,9 +1,13 @@
 import { useEffect, useState } from "react";
 import Particles, { initParticlesEngine } from "@tsparticles/react";
 import { loadSlim } from "@tsparticles/slim";
+import type { Container } from "@tsparticles/engine";
+import { useUI } from "../context/UIContext";
 
 export default function ParticleBackground() {
   const [init, setInit] = useState(false);
+  const [container, setContainer] = useState<Container | undefined>(undefined);
+  const { isChatOpen } = useUI();
 
   useEffect(() => {
     initParticlesEngine(async (engine) => {
@@ -14,12 +18,26 @@ export default function ParticleBackground() {
     });
   }, []);
 
+  useEffect(() => {
+    if (!container) return;
+    if (isChatOpen) {
+      container.pause();
+    } else {
+      container.play();
+    }
+  }, [isChatOpen, container]);
+
+  const particlesLoaded = async (container?: Container): Promise<void> => {
+    setContainer(container);
+  };
+
   if (!init) return null;
 
   return (
     <Particles
       id="tsparticles"
       className="absolute inset-0 -z-10 pointer-events-none"
+      particlesLoaded={particlesLoaded}
       options={{
         background: {
           color: {

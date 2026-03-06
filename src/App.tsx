@@ -25,21 +25,21 @@ function Demo() {
       </p>
       
       <Nudge
-        ringColor="#00f0ff"
+        ringColor="#ff3300"
         ringSize={3}
-        duration={10000}
+        persistent={true}
         hint="Go to documentation!"
         zIndex={45}
         tooltipPosition="bottom"
         ringBorderRadius="6px"
-        tooltipBgColor="#ffffff"
-        tooltipTextColor="#000000"
+        tooltipBgColor="#0f172a"
+        tooltipTextColor="#ffffff"
       >
         <button 
           onClick={() => window.open('https://www.npmjs.com/package/react-nudge-ui', '_blank')}
           style={{
             padding: "0.5rem 1.25rem",
-            backgroundColor: "#ff003c",
+            backgroundColor: "#ff3300",
             color: "white",
             border: "none",
             borderRadius: "6px",

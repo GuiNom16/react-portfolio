@@ -1,6 +1,7 @@
 import React, { useRef, useMemo } from 'react';
 import { useFrame, useThree } from '@react-three/fiber';
 import * as THREE from 'three';
+import { useUI } from '../context/UIContext';
 
 interface NeuralNetworkProps {
     count: number;
@@ -10,6 +11,7 @@ interface NeuralNetworkProps {
 
 const NeuralNetwork: React.FC<NeuralNetworkProps> = ({ count, maxDistance, speed }) => {
     const { mouse, viewport } = useThree();
+    const { isChatOpen } = useUI();
     const instancedNodesRef = useRef<THREE.InstancedMesh>(null!);
     const linesRef = useRef<THREE.LineSegments>(null!);
 
@@ -61,6 +63,8 @@ const NeuralNetwork: React.FC<NeuralNetworkProps> = ({ count, maxDistance, speed
     const lineColors = useMemo(() => new Float32Array(count * 60 * 3), [count]);
 
     useFrame((state) => {
+        if (isChatOpen) return;
+
         const time = state.clock.getElapsedTime();
         let lineIdx = 0;
         const lineColor = new THREE.Color('#ff003c'); // Red theme
